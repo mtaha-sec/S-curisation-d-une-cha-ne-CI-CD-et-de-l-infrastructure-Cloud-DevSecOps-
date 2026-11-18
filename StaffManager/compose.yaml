@@ -1,0 +1,18 @@
+services:
+  staffmanager:
+    build: .
+    container_name: staffmanager
+    ports:
+      - "5000:5000"
+    environment:
+      SECRET_KEY: ${SECRET_KEY:?Define SECRET_KEY in .env}
+      DATABASE_URL: sqlite:////data/staffmanager.db
+      ADMIN_USERNAME: ${ADMIN_USERNAME}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      COOKIE_SECURE: "false"
+    volumes:
+      - staffmanager_data:/data
+    restart: unless-stopped
+
+volumes:
+  staffmanager_data:

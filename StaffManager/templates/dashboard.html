@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<p class="eyebrow">TABLEAU DE BORD</p>
+<h1>Bonjour {{ current_user.username }} 👋</h1>
+<p class="muted">Vous êtes connecté avec le rôle <strong>{{ current_user.role }}</strong>.</p>
+<div class="cards">
+  <article class="card"><span>Votre rôle</span><strong>{{ current_user.role|capitalize }}</strong></article>
+  {% if current_user.role in ['admin', 'hr'] %}
+  <article class="card"><span>Employés enregistrés</span><strong>{{ total }}</strong></article>
+  {% endif %}
+</div>
+<div class="panel">
+  <h2>Accès rapide</h2>
+  {% if current_user.role in ['admin', 'hr'] %}
+    <p>Gérez les informations des employés depuis l'espace dédié.</p>
+    <a class="button" href="{{ url_for('employees') }}">Consulter les employés</a>
+  {% else %}
+    <p>Consultez les informations de votre profil.</p>
+    <a class="button" href="{{ url_for('my_profile') }}">Mon profil</a>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel narrow">
+  <p class="eyebrow">ADMINISTRATION</p><h1>Créer un compte utilisateur</h1>
+  <p class="muted">Seul un administrateur peut créer des comptes.</p>
+  <form method="post">
+    {{ form.hidden_tag() }}
+    <label>{{ form.username.label }}{{ form.username(autocomplete="off") }}</label>
+    <label>{{ form.password.label }}{{ form.password(autocomplete="new-password") }}</label>
+    <small class="muted">12 caractères minimum pour ce prototype.</small>
+    <label>{{ form.role.label }}{{ form.role() }}</label>
+    {{ form.submit(class_="primary") }}
+  </form>
+</section>
+{% endblock %}

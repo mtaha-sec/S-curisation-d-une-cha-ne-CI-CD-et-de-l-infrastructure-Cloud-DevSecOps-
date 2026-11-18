@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}StaffManager{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="{{ url_for('dashboard') }}">StaffManager</a>
+  {% if current_user.is_authenticated %}
+  <nav>
+    <a href="{{ url_for('dashboard') }}">Tableau de bord</a>
+    {% if current_user.role in ['admin', 'hr'] %}<a href="{{ url_for('employees') }}">Employés</a>{% endif %}
+    {% if current_user.role == 'admin' %}<a href="{{ url_for('create_user') }}">Créer un compte</a>{% endif %}
+    <a href="{{ url_for('my_profile') }}">Mon profil</a>
+    <form class="logout" method="post" action="{{ url_for('logout') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button class="link-button" type="submit">Déconnexion</button>
+    </form>
+  </nav>
+  {% endif %}
+</header>
+<main class="container">
+  {% for category, message in get_flashed_messages(with_categories=true) %}
+    <div class="flash {{ category }}">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</main>
+<footer>StaffManager · Projet pédagogique de sécurisation CI/CD</footer>
+</body>
+</html>

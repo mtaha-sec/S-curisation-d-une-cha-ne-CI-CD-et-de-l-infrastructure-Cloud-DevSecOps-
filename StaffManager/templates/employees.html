@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<p class="eyebrow">RESSOURCES HUMAINES</p><h1>Gestion des employés</h1>
+<div class="grid">
+  <section class="panel">
+    <h2>Ajouter un employé</h2>
+    <form method="post">
+      {{ form.hidden_tag() }}
+      {% for field in [form.first_name, form.last_name, form.email, form.department] %}
+        <label>{{ field.label }}{{ field() }}</label>
+        {% for e in field.errors %}<small class="error">{{ e }}</small>{% endfor %}
+      {% endfor %}
+      {{ form.submit(class_="primary") }}
+    </form>
+  </section>
+  <section class="panel">
+    <h2>Employés enregistrés</h2>
+    {% if employees %}
+    <div class="table-wrap"><table>
+      <thead><tr><th>Nom</th><th>E-mail</th><th>Département</th></tr></thead>
+      <tbody>{% for employee in employees %}
+      <tr><td>{{ employee.first_name }} {{ employee.last_name }}</td><td>{{ employee.email }}</td><td>{{ employee.department }}</td></tr>
+      {% endfor %}</tbody>
+    </table></div>
+    {% else %}<p class="muted">Aucun employé pour le moment.</p>{% endif %}
+  </section>
+</div>
+{% endblock %}

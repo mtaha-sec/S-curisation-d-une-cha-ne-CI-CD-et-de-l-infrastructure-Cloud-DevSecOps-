@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel narrow"><p class="eyebrow">MON ESPACE</p><h1>Mon profil</h1>
+<p><strong>Identifiant :</strong> {{ current_user.username }}</p>
+<p><strong>Rôle :</strong> {{ current_user.role }}</p>
+{% if employee %}
+<p><strong>Nom :</strong> {{ employee.first_name }} {{ employee.last_name }}</p>
+<p><strong>E-mail :</strong> {{ employee.email }}</p>
+<p><strong>Département :</strong> {{ employee.department }}</p>
+{% else %}<p class="muted">Aucune fiche employé n'est associée à ce compte de démonstration.</p>{% endif %}
+</section>
+{% endblock %}

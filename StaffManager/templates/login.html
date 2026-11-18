@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Connexion · StaffManager{% endblock %}
+{% block content %}
+<section class="auth-card">
+  <p class="eyebrow">ESPACE PROFESSIONNEL</p>
+  <h1>Bienvenue</h1>
+  <p class="muted">Connectez-vous pour accéder à StaffManager.</p>
+  <form method="post">
+    {{ form.hidden_tag() }}
+    <label>{{ form.username.label }}{{ form.username(autocomplete="username", placeholder="Votre identifiant") }}</label>
+    {% for e in form.username.errors %}<small class="error">{{ e }}</small>{% endfor %}
+    <label>{{ form.password.label }}{{ form.password(autocomplete="current-password", placeholder="Votre mot de passe") }}</label>
+    {% for e in form.password.errors %}<small class="error">{{ e }}</small>{% endfor %}
+    {{ form.submit(class_="primary") }}
+  </form>
+</section>
+{% endblock %}
